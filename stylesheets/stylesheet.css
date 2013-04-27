@@ -264,7 +264,7 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 645px;
+  max-width: 960px;
   padding: 20px 10px;
   margin: 0 auto;
 }
@@ -350,7 +350,7 @@ Full-Width Styles
 
   padding-top: 40px;
   overflow:hidden;
-  width:450px;
+  width:960px;
 
 }
 
@@ -359,13 +359,13 @@ Full-Width Styles
 }
 
 #div-gallery {
-	height:300px;
-	width:450px;
+	height:500px;
+	width:960px;
 }
 
 #img-gallery{
-    height:300px;
-	width:450px;
+    height:500px;
+	width:960px;
 	
 }
 
@@ -384,7 +384,7 @@ Small Device Styles
 
   .inner {
     min-width: 320px;
-    max-width: 450px;
+    max-width: 960px;
   }
 
   #project_title {
