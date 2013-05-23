@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_grey">#3B3B3B</color>
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_green">#b2276b23</color>
+    <color name="toast_blue">#BB1880D1</color>
+    <color name="toast_grey">#BB3B3B3B</color>
+    <color name="toast_red">#B28D1616</color>
+    <color name="bg_color">#ff222222</color>
+    <color name="sidebar_item_text_color">#ff999999</color>
+    <color name="sidebar_item_text_shadow_color">#bf000000</color>
+    
+    <color name="color_user_name">#ff1f1f1f</color>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="ThemeLightNoActionBar" parent="@style/Theme.Sherlock.Light.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+    
+    <style name="ThemeLightNoActionBar.AnimationFadeIn" parent="@style/Theme.Sherlock.Light.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimationFade</item>
+    </style>
+    
+    <style name="ThemeLightNoActionBar.NoAnimation" parent="@style/Theme.Sherlock.Light.NoActionBar">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+    
+    <style name="ThemeDarkNoActionBar.NoAnimation" parent="@style/Theme.Sherlock.NoActionBar">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+    
+     <style name="ThemeDarkNoActionBar" parent="@style/Theme.Sherlock.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+    
+    <style name="ThemeDarkActionBar" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+    </style>
+
+	<style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_scroll_in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_scroll_to_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_scroll_in_from_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_scroll_to_right</item>
+    </style>
+    
+	<style name="activityAnimationFade" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_fadein</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_fadeout</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_scroll_in_from_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_scroll_to_right</item>
+    </style>
+</resources>

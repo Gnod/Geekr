@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    			xmlns:geekr="http://schemas.android.com/apk/res/com.gnod.geekr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    >
+    <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"    
+    android:orientation="vertical"
+     >
+    <ListView
+        android:id="@+id/view_detail_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:duplicateParentState="true"
+        android:divider="@null"
+        android:headerDividersEnabled="false"
+        android:footerDividersEnabled="false"
+        android:overScrollMode="never"
+        />
+	</LinearLayout>
+	<com.gnod.geekr.widget.ColorToast
+        android:id="@+id/view_detail_toast_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        geekr:alignTop="true" />
+</RelativeLayout>

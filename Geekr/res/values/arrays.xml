@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arrays_status_met">
+        <item >全部</item>
+        <item >我关注的人</item>
+    </string-array>
+    
+    <string-array name="arrays_status">
+        <item >全部</item>
+        <item >相互关注</item>
+    </string-array>
+    <string-array name="upload_pic_quality">
+         <item>高</item>
+        <item>中</item>
+        <item>底</item>
+        <item>自动</item>
+    </string-array>
+    <string-array name="pic_show_model">
+         <item>大图</item>
+        <item>小图</item>
+        <item>自动</item>
+    </string-array>
+</resources>

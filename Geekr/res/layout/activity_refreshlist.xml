@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekr="http://schemas.android.com/apk/res/com.gnod.geekr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"    
+    android:background="@drawable/background" >
+    
+    <ListView
+        android:id="@+id/view_refresh_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@null"
+        android:duplicateParentState="true"
+        android:scrollingCache="false"
+        android:divider="@null"
+        android:headerDividersEnabled="false"
+        android:footerDividersEnabled="false"
+        android:overScrollMode="never"
+        />
+
+    <com.gnod.geekr.widget.ColorToast
+            android:id="@+id/layout_listview_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            geekr:alignTop="true" />
+</RelativeLayout>

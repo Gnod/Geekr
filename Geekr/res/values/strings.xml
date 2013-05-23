@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">Geekr</string>
+	<string name="new_fans">New Fans</string>
+    <string name="new_comment">New Comments</string>
+    <string name="comment_atme">Comment At Me</string>
+    <string name="at_me">At Me</string>
+    <string name="special_person">Speciall</string>
+    
+    <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_update">最近更新：</string>
+    
+</resources>

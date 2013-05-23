@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/listview_item_bg"
+    android:alpha="0.95"
+    >
+    
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:orientation="horizontal" >
+
+         <RelativeLayout
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/wb_avatar_frame" >
+
+            <com.gnod.geekr.widget.AvatarView
+                android:id="@+id/image_users_item_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/avatar_default" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            android:paddingBottom="3dp"
+            android:paddingLeft="17dp"
+            android:paddingRight="8dp"
+            >
+			    <TextView 
+                android:id="@+id/text_users_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+    
+</RelativeLayout>

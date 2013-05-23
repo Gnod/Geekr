@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.95"
+    android:background="@drawable/listview_item_bg" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp" >
+
+        <RelativeLayout
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/wb_avatar_frame" >
+
+            <com.gnod.geekr.widget.AvatarView
+                android:id="@+id/itemimage_comment_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar_default" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            android:paddingLeft="17dp"
+            android:paddingRight="8dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/itemtext_comment_name"
+                    style="@style/user_name"
+                    />
+
+                <TextView
+                    android:id="@+id/itemtext_comment_time"
+                    style="@style/text_time" />
+            </LinearLayout>
+
+            <com.gnod.geekr.widget.ImageTextView
+                android:id="@+id/itemtext_comment_content"
+                style="@style/text_status" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/itemtext_comment_from"
+                    style="@style/text_from"  />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

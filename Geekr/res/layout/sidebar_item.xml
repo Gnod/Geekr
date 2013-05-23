@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sidebar_button"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:orientation="horizontal" >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/action_bar_height"
+            >
+        <ImageView
+            android:id="@+id/sidebar_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop" />
+		</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_bar_height"
+            >
+            <TextView 
+                android:id="@+id/sidebar_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/sidebar_item_text_color"
+                android:shadowColor="@color/sidebar_item_text_shadow_color"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:shadowDy="2.0"
+                android:shadowRadius="2.0"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+   </LinearLayout>
+<!-- 
+    <ImageView 
+        android:id="@+id/sidebar_item_image_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        />
+         -->
+</RelativeLayout>

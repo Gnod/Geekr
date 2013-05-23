@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_timeline_avatar"
+    android:layout_width="@dimen/timeline_avatar_layout_size"
+    android:layout_height="@dimen/timeline_avatar_layout_size" >
+
+    <RelativeLayout
+        android:layout_width="@dimen/timeline_avatar_size"
+        android:layout_height="@dimen/timeline_avatar_size"
+        android:background="@drawable/wb_avatar_frame" >
+
+        <com.gnod.geekr.widget.AvatarView
+            android:id="@+id/image_avatar_small"
+            style="@style/timeline_avatar" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@id/image_avatar_verified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop" />
+
+</RelativeLayout>

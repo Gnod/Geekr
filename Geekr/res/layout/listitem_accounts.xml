@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sidebar_button"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/layout_accounts_avatar"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+        	android:paddingTop="10dp"
+        	android:paddingLeft="10dp"
+             >
+			<RelativeLayout
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:background="@drawable/wb_avatar_frame" >
+	            <com.gnod.geekr.widget.AvatarView
+	                android:id="@+id/image_account_avatar"
+	                android:layout_width="match_parent"
+	                android:layout_height="match_parent"
+	                android:layout_margin="1dp"
+	                android:scaleType="centerCrop"
+	                android:contentDescription="@string/app_name"
+	                android:src="@drawable/avatar_default" />
+            </RelativeLayout>
+            <ImageView 
+                android:id="@+id/image_account_verified"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/app_name"
+                />
+        </RelativeLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="6dp"
+            >
+            <TextView 
+                android:id="@+id/text_account_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/text_account_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_white"
+                android:textSize="10sp" />
+       </LinearLayout>
+   </LinearLayout>
+   
+    <ImageView 
+        android:id="@+id/image_accout_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

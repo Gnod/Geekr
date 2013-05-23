@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="CheckBoxAppTheme" parent="android:Widget.CompoundButton.CheckBox">
+      <item name="android:button">@drawable/btn_check_holo_light</item>
+  </style>
+	<style name="RadioTimeline" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/radio_timeline</item>
+  </style>
+  <style name="RadioMentions" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/radio_mention</item>
+  </style>
+  <style name="RadioComments" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/radio_comments</item>
+  </style>
+  <style name="RadioProfile" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/radio_profile</item>
+  </style>
+</resources>

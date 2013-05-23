@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<item 
+    android:id="@+id/menu_detail_refresh"
+    android:icon="@drawable/icon_refresh_normal"
+    android:showAsAction="always"
+    android:title="刷新"
+    android:visible="true"
+    />
+<item 
+    android:id="@+id/menu_detail_ret"
+    android:icon="@drawable/icon_retweet_normal"
+    android:showAsAction="always"
+    android:title="转发"
+    android:visible="true"
+    />
+<item 
+    android:id="@+id/menu_detail_cmt"
+    android:icon="@drawable/icon_comment_normal"
+    android:showAsAction="always"
+    android:title="评论"
+    android:visible="true"
+    />
+</menu>

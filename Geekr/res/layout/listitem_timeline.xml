@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="8dp" >
+
+        <include layout="@layout/layout_avatar_small" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="-3dp"
+            android:background="@drawable/thumb_bubble"
+            android:orientation="vertical"
+            android:paddingBottom="3dp"
+            android:paddingLeft="17dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp" >
+
+                <TextView
+                    android:id="@+id/status_list_item_name"
+                    style="@style/user_name" />
+
+                <TextView
+                    android:id="@+id/status_list_item_time"
+                    style="@style/text_time" />
+            </LinearLayout>
+
+            <com.gnod.geekr.widget.ImageTextView
+                android:id="@+id/text_timeline_status"
+                style="@style/text_status" />
+
+            <com.gnod.geekr.widget.URLImageView
+                android:id="@+id/status_list_item_thumb"
+                style="@style/timeline_thumb" />
+
+            <LinearLayout
+                android:id="@+id/status_list_item_retweet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/wb_retweet_bg2"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <com.gnod.geekr.widget.ImageTextView
+                    android:id="@+id/text_timeline_retweet_status"
+                    style="@style/text_status" />
+
+                <com.gnod.geekr.widget.URLImageView
+                    android:id="@+id/status_list_item_retweet_thumb"
+                    style="@style/timeline_thumb" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/text_timeline_status_from"
+                    style="@style/text_from" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/timeline_btn_ret_normal" />
+
+                    <TextView
+                        android:id="@+id/status_list_item_retweet_count"
+                        style="@style/text_count" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/timeline_btn_cmt_normal" />
+
+                    <TextView
+                        android:id="@+id/status_list_item_comment_count"
+                        style="@style/text_count" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.gnod.geekr.widget.GeekrPanel
+        android:id="@+id/view_timeline_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+	<com.gnod.geekr.widget.FontTextView 
+	    android:id="@+id/text_hint"
+	    android:layout_width="match_parent"
+	    android:layout_height="@dimen/action_bar_height"
+	    android:gravity="center"
+	    android:textSize="16sp"
+	    android:textColor="@color/color_grey"
+	    android:visibility="invisible"
+	    />
+	<ProgressBar
+	    	android:id="@+id/view_progress"
+            android:layout_width="24.0dip"
+            android:layout_height="24.0dip"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:indeterminateDrawable="@drawable/custom_progressbar" 
+            android:visibility="invisible"
+            />
+</RelativeLayout>

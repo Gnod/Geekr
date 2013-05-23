@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference 
+            android:key="notification_switch"
+            android:title="允许后台通知"
+            android:defaultValue="true"
+            />
+    <PreferenceCategory 
+        android:title="通知类型"
+        >
+        <CheckBoxPreference 
+            android:key="newfans"
+            android:title="新粉丝"
+            android:defaultValue="false"
+            />
+        <CheckBoxPreference 
+            android:key="newcomment"
+            android:title="评论"
+            android:defaultValue="false"
+            />
+        <CheckBoxPreference 
+            android:key="commentatme"
+            android:title=" @我的评论"
+            android:defaultValue="false"
+            />
+       <CheckBoxPreference 
+            android:key="atmeweibo"
+            android:title=" @我的微博"
+            android:defaultValue="false"
+            />
+       <CheckBoxPreference 
+		    android:key="specialperson"
+		    android:title="特别关注·Beta"
+		    android:summary="(当指定用户有消息更新时提醒)"
+		    android:defaultValue="false"
+		    />
+    </PreferenceCategory>
+     <PreferenceCategory 
+        android:title="其它设置"
+        >
+		<Preference 
+		    android:key="notificationinterval"
+		    android:title="后台推送间隔"
+		    />
+		 <CheckBoxPreference 
+            android:key="nodistrubed"
+            android:title="夜间免打扰模式"
+            android:summary="免打扰时间段(0:00~8:00)"
+            android:defaultValue="true"
+            /> 
+    </PreferenceCategory>
+</PreferenceScreen>

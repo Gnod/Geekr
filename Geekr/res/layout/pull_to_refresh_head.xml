@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="match_parent"  
+    android:layout_height="@dimen/action_bar_height"  
+    android:orientation="vertical">  
+    <RelativeLayout  
+        android:id="@+id/head_contentLayout"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent" 
+    	>  
+    	
+        <FrameLayout  
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_alignParentLeft="true"  
+            android:layout_centerVertical="true"
+        	android:layout_marginLeft="30dip"
+        	android:layout_marginRight="20dip">  
+            <ImageView  
+                android:id="@+id/head_arrowImageView"  
+                android:layout_width="18dp"  
+                android:layout_height="18dp"  
+                android:gravity="center"  
+                android:src="@drawable/ic_pulltorefresh_arrow" />  
+        </FrameLayout> 
+        <FrameLayout  
+            android:layout_width="wrap_content"  
+            android:layout_height="fill_parent"  
+            android:layout_alignParentLeft="true"  
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dip"
+        	android:layout_marginRight="20dip">  
+  			<ProgressBar
+		        android:id="@+id/head_progressBar"
+	            android:layout_width="24.0dip"
+	            android:layout_height="24.0dip"
+	            android:layout_centerInParent="true"
+	            android:background="@android:color/transparent"
+	            android:indeterminateDrawable="@drawable/custom_progressbar_dark"
+	            android:visibility="gone"
+	            />
+        </FrameLayout>
+  
+        <LinearLayout
+            android:layout_width="wrap_content"  
+            android:layout_height="wrap_content"  
+            android:layout_centerInParent="true"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center"  
+            android:orientation="vertical">  
+            <TextView
+                android:id="@+id/head_tipsTextView"  
+                android:layout_width="wrap_content"  
+                android:layout_height="wrap_content"  
+                android:text="@string/pull_to_refresh_pull_label"
+                android:textSize="16sp"
+                android:textColor="@color/color_white"/>  
+        </LinearLayout>  
+    </RelativeLayout>  
+  
+  
+</LinearLayout> 

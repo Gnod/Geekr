@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<item 
+    android:id="@+id/menu_accounts_add"
+    android:icon="@drawable/btn_adduser"
+    android:showAsAction="always"
+    android:title="添加新帐号"
+    android:visible="true"
+    />
+</menu>

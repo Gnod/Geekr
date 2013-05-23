@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:geekr="http://schemas.android.com/apk/res/com.gnod.geekr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_black" >
+
+    <com.gnod.geekr.widget.PullToRefreshListView
+        android:id="@+id/view_timeline_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:duplicateParentState="true"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:overScrollMode="never"
+        android:scrollingCache="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/image_timleline_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abs__action_bar_default_height"
+            android:background="@drawable/actionbar_bg_black"
+            android:gravity="center_vertical" >
+
+            <com.gnod.geekr.widget.GeekrSpinner
+                android:id="@+id/view_timeline_spinner"
+                style="@attr/actionDropDownStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_geekr"
+                android:paddingLeft="4dp" />
+
+            <ImageView
+                android:id="@+id/btn_timeline_draftbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/btn_draftbox" />
+
+            <ProgressBar
+                android:id="@+id/view_timeline_progressbar"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btn_timeline_draftbox"
+                android:background="@android:color/transparent"
+                android:indeterminateDrawable="@drawable/custom_progressbar"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <com.gnod.geekr.widget.ColorToast
+            android:id="@+id/view_timeline_toast_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            geekr:alignTop="true" />
+    </LinearLayout>
+
+    <com.gnod.geekr.widget.ColorToast
+        android:id="@+id/view_timeline_toast_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        geekr:alignTop="false" />
+
+</RelativeLayout>

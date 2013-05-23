@@ -1,0 +1,88 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+	<style name="loading_small" parent="@android:style/Widget.ProgressBar.Horizontal">
+		<item name="android:indeterminateDrawable">@anim/loading</item>
+		<item name="android:layout_width">24dp</item> 
+		<item name="android:layout_height">24dp</item>
+		<item name="android:scaleType">centerCrop</item>
+	</style>
+	<style name="search_edittext" parent="android:Widget.EditText">
+	  <item name="android:background">@drawable/edit_text_holo_light</item>
+	  <item name="android:textColor">@color/color_white</item>
+  </style>
+	<style name="up_radius_black_style">
+        <item name="android:shadowColor">#ff000000</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">-1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+    <style name="down_radius_white_style">
+        <item name="android:shadowColor">#ffffffff</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+    
+    <style name="timeline_avatar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">1dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/avatar_default</item>
+    </style>
+    <style name="base_user_name">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/color_user_name</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="user_name" parent="@style/base_user_name">
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="text_time">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/color_grey</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="text_status" >
+        <item name="android:textColor">@color/color_grey</item>
+        <item name="android:textSize">@dimen/status_text_size</item>
+        <item name="android:textColorLink">#ff105067</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+    </style>
+    
+    <style name="timeline_thumb">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:maxHeight">200.0dp</item>
+    </style>
+    <style name="text_from">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/color_grey</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="text_count">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:textColor">@color/color_grey</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:text">0</item>
+    </style>
+     <style name="sd_btn" parent="@style/sd_item">
+        <item name="android:background">@drawable/sd_btn_selector</item>
+        <item name="android:layout_width">60.0dip</item>
+    </style>
+    <style name="sd_item">
+        <item name="android:layout_height">45dp</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+</resources>

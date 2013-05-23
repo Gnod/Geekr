@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_grey"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/abs__action_bar_default_height" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abs__action_bar_default_height" >
+
+            <LinearLayout
+                android:id="@+id/fragment_account"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/menu_actionbar"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp" >
+
+                    <RelativeLayout
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:background="@drawable/wb_avatar_frame" >
+
+                        <com.gnod.geekr.widget.AvatarView
+                            android:id="@+id/fragment_account_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="1dp"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/avatar_default" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/fragment_account_verified_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerCrop" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="6dp" >
+
+                    <TextView
+                        android:id="@+id/fragment_account_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/fragement_account_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_arrows" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/account_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@null"
+            android:divider="@null"
+            android:duplicateParentState="true"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:overScrollMode="never"
+            android:paddingLeft="@dimen/list_padding"
+            android:paddingRight="@dimen/list_padding"
+            android:scrollingCache="false" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abs__action_bar_default_height"
+        android:layout_alignParentBottom="true" >
+
+        <ImageView
+            android:id="@+id/layout_menu_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_setting"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

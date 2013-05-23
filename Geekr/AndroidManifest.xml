@@ -1,0 +1,148 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gnod.geekr"
+    android:versionCode="9"
+    android:versionName="1.2.4" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />    
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+	<uses-permission android:name="android.permission.VIBRATE" />
+	
+    <application
+        android:name="com.gnod.geekr.app.AppConfig"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/ic_launcher_logo"
+         >
+         <activity
+            android:name="com.gnod.geekr.app.AppStart"
+            android:theme="@style/ThemeDarkNoActionBar.NoAnimation"
+            android:noHistory="true"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+   	 	</activity>
+   		<activity
+            android:name="com.gnod.geekr.ui.activity.LoginActivity"
+            android:theme="@style/ThemeLightNoActionBar.AnimationFadeIn"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.TimeLineActivity"
+            android:theme="@style/ThemeDarkNoActionBar"
+            android:launchMode="singleTop"
+            />
+          <activity
+            android:name="com.gnod.geekr.ui.activity.StatusDetailActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.OAuthActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.ProfileActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.buuuk.android.gallery.ImageViewFlipper"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Sherlock.Light.NoActionBar"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.gnod.geekr.ui.activity.PostStatusActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+        <activity
+            android:name="com.gnod.geekr.ui.activity.SettingActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@drawable/rootblock_icon_set"
+            />
+        <activity
+            android:name="com.gnod.geekr.ui.activity.NotificationActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.FriendListActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.AtUserActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.SearchActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.AccountsActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+          <activity
+            android:name="com.gnod.geekr.ui.activity.TopicsActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+           <activity
+            android:name="com.gnod.geekr.ui.activity.FavoritesActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+         <activity
+            android:name="com.gnod.geekr.ui.activity.CommentsActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+        <activity
+            android:name="com.gnod.geekr.ui.activity.AboutActivity"
+            android:theme="@style/ThemeDarkActionBar"
+            android:icon="@android:color/transparent"
+            />
+        
+        <!-- 友盟反馈 -->
+        <activity
+            android:name="com.umeng.fb.ui.SendFeedback"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="com.umeng.fb.ui.FeedbackConversations" />
+        <activity
+            android:name="com.umeng.fb.ui.FeedbackConversation"
+            android:configChanges="keyboard" />
+        
+        <service
+            android:name="com.gnod.geekr.service.PollingService"
+            android:process=":PollingService"
+            >
+        </service>
+        
+        <service
+            android:name="com.umeng.common.net.DownloadingService"
+            android:exported="true"
+            android:process=":DownloadingService" >
+        </service>
+		
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="51835bdd56240b65f1008b7b" >
+        </meta-data>
+    </application>
+
+</manifest>

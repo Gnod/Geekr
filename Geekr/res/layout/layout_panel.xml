@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout 
+    android:id="@+id/layout_sd_btns"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/sd_bg"
+    android:gravity="right" >
+
+    <ImageView
+        android:id="@+id/sd_btn_del"
+        style="@style/sd_btn"
+        android:src="@drawable/sd_btn_del"
+        android:visibility="gone" 
+        />
+
+    <ImageView
+        android:id="@+id/sd_btn_del_divider"
+        style="@style/sd_item"
+        android:layout_width="1.5dip"
+        android:src="@drawable/sd_divider"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/sd_btn_fav"
+        style="@style/sd_btn"
+        android:src="@drawable/sd_btn_fav" />
+
+    <ImageView
+        android:id="@+id/sd_btn_fav_divider"
+        style="@style/sd_item"
+        android:layout_width="1.5dip"
+        android:src="@drawable/sd_divider" />
+
+    <ImageView
+        android:id="@+id/sd_btn_view"
+        style="@style/sd_btn"
+        android:src="@drawable/sd_btn_view"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/sd_btn_view_divider"
+        style="@style/sd_item"
+        android:layout_width="1.5dip"
+        android:src="@drawable/sd_divider"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/sd_btn_copy"
+        style="@style/sd_btn"
+        android:src="@drawable/sd_btn_copy" />
+
+    <ImageView
+        android:id="@+id/sd_btn_ret_divider"
+        style="@style/sd_item"
+        android:layout_width="1.5dip"
+        android:src="@drawable/sd_divider" />
+
+    <ImageView
+        android:id="@+id/sd_btn_ret"
+        style="@style/sd_btn"
+        android:src="@drawable/sd_btn_ret" />
+
+    <ImageView
+        style="@style/sd_item"
+        android:layout_width="1.5dip"
+        android:src="@drawable/sd_divider" />
+
+    <ImageView
+        android:id="@+id/sd_btn_cmt"
+        style="@style/sd_btn"
+        android:src="@drawable/sd_btn_cmt" />
+
+</LinearLayout>
+    
+</RelativeLayout>
