@@ -88,6 +88,20 @@ public class ProfileActivity extends BaseActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		AppConfig.sImageFetcher.setExitTasksEarly(false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AppConfig.sImageFetcher.setPauseWork(false);
+		AppConfig.sImageFetcher.setExitTasksEarly(true);
+		AppConfig.sImageFetcher.flushCache();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_refresh, menu);
 		refresh = menu.findItem(R.id.menu_refresh);
@@ -146,6 +160,10 @@ public class ProfileActivity extends BaseActivity {
 		headView.btnFollowState = layoutUserInfo.findViewById(R.id.btn_profile_follow);
 		headView.progressIndicate = (ProgressBar)layoutUserInfo.findViewById(R.id.view_profile_follow_progress);
 		headView.textFollowState = (TextView)layoutUserInfo.findViewById(R.id.text_profile_followstate);
+		
+		headView.layoutFansCounts = layoutUserInfo.findViewById(R.id.layout_fans_counts);
+		headView.layoutFollowsCounts = layoutUserInfo.findViewById(R.id.layout_follows_counts);
+		headView.layoutStatusCounts = layoutUserInfo.findViewById(R.id.layout_status_counts);
 		
 		footer = new ListViewFooter(this);
 		
@@ -232,7 +250,10 @@ public class ProfileActivity extends BaseActivity {
 	private void bindView() {
 		setTitle("个人主页");
 		setMagicImage();
-		drawManager.loadAvatar(user.largeIconURL, headView.imageAvatar, false);
+//		drawManager.loadAvatar(user.largeIconURL, headView.imageAvatar, false);
+		AppConfig.sImageFetcher.loadImage(
+				user.largeIconURL, headView.imageAvatar, 
+				R.drawable.avatar_default);
 	}
 
 	private void setMagicImage() {
@@ -293,8 +314,12 @@ public class ProfileActivity extends BaseActivity {
 			});
 			
 		}
-		drawManager.loadAvatar(userInfo.largeIconURL, 
-				headView.imageAvatar, false);
+//		drawManager.loadAvatar(userInfo.largeIconURL, 
+//				headView.imageAvatar, false);
+		AppConfig.sImageFetcher.loadImage(
+				userInfo.largeIconURL, 
+				headView.imageAvatar, 
+				R.drawable.avatar_default);
 		headView.textName.setText(userInfo.nickName);
 		
 		if(!StringUtils.isNullOrEmpty(userInfo.description)) {
@@ -306,29 +331,28 @@ public class ProfileActivity extends BaseActivity {
 		
 		headView.textLocation.setText(userInfo.location);
 		headView.textFollowersCount.setText(userInfo.followersCount);
-		headView.textFollowersCount.setTag(userInfo);
-		headView.textFollowersCount.setOnClickListener(new OnClickListener() {
+		headView.layoutFansCounts.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), FriendListActivity.class);
-				intent.putExtra("UserInfoModel", (UserInfoModel)v.getTag());
+				intent.putExtra("UserInfoModel", userInfo);
 				intent.putExtra("Type", FriendListActivity.TYPE_FOLLOWERS);
 				v.getContext().startActivity(intent);
 			}
 		});
+		
 		headView.textFriendsCount.setText(userInfo.friendsCount);
-		headView.textFriendsCount.setTag(userInfo);
-		headView.textFriendsCount.setOnClickListener(new OnClickListener() {
+		headView.layoutFollowsCounts.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), FriendListActivity.class);
-				intent.putExtra("UserInfoModel", (UserInfoModel)v.getTag());
+				intent.putExtra("UserInfoModel", userInfo);
 				intent.putExtra("Type", FriendListActivity.TYPE_FOLLOWING);
 				v.getContext().startActivity(intent);
 			}
 		});
 		headView.textStatusesCount.setText(userInfo.statusCount);
-		headView.textStatusesCount.setOnClickListener(new OnClickListener() {
+		headView.layoutStatusCounts.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if(mList.size() > 0)
@@ -484,6 +508,10 @@ public class ProfileActivity extends BaseActivity {
 		public TextView textFollowersCount;
 		public TextView textFriendsCount;
 		public TextView textStatusesCount;
+		
+		public View layoutFansCounts;
+		public View layoutFollowsCounts;
+		public View layoutStatusCounts;
 	}
 	
 }

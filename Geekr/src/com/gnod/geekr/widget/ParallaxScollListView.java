@@ -1,7 +1,11 @@
 package com.gnod.geekr.widget;
 
+import com.gnod.geekr.app.AppConfig;
+import com.gnod.geekr.tool.manager.Utils;
+
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -18,7 +22,7 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 	int mImageViewHeight = -1;
 	public final static double NO_ZOOM = 1;
 	public final static double ZOOM_X2 = 2;
-	
+
 	private interface OnOverScrollByListener {
 		public boolean overScrollBy(int deltaX, int deltaY, int scrollX,
 				int scrollY, int scrollRangeX, int scrollRangeY,
@@ -28,7 +32,7 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 	private interface OnTouchEventListener {
 		public void onTouchEvent(MotionEvent ev);
 	}
-	
+
 	public ParallaxScollListView(Context context, AttributeSet attrs,
 			int defStyle) {
 		super(context, attrs, defStyle);
@@ -44,7 +48,13 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+		if (scrollState == OnScrollListener.SCROLL_STATE_FLING) {
+			if (!Utils.hasHoneycomb()) {
+				AppConfig.sImageFetcher.setPauseWork(true);
+			}
+		} else {
+			AppConfig.sImageFetcher.setPauseWork(false);
+		}
 	}
 
 	@Override
@@ -66,18 +76,18 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 	public void onScroll(AbsListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		onTouched.onTouchEvent(ev);
 		return super.onTouchEvent(ev);
 	}
-	
+
 	public void setParallaxImageView(ImageView iv) {
 		mImageView = iv;
 		mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 	}
-	
+
 	public void setViewsBounds(double zoomRatio) {
 		if (mImageViewHeight == -1) {
 			mImageViewHeight = mImageView.getHeight();
@@ -89,7 +99,7 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 					: 1));
 		}
 	}
-	
+
 	private OnOverScrollByListener onScroll = new OnOverScrollByListener() {
 		@Override
 		public boolean overScrollBy(int deltaX, int deltaY, int scrollX,
@@ -125,15 +135,15 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 		public void onTouchEvent(MotionEvent ev) {
 			if (ev.getAction() == MotionEvent.ACTION_UP) {
 				if (mImageViewHeight - 1 < mImageView.getHeight()) {
-					ResetAnimimation animation = new ResetAnimimation(mImageView,
-							mImageViewHeight, false);
+					ResetAnimimation animation = new ResetAnimimation(
+							mImageView, mImageViewHeight, false);
 					animation.setDuration(300);
 					mImageView.startAnimation(animation);
 				}
 			}
 		}
 	};
-	
+
 	public class ResetAnimimation extends Animation {
 		int targetHeight;
 		int originalHeight;
@@ -150,10 +160,12 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 		}
 
 		@Override
-		protected void applyTransformation(float interpolatedTime, Transformation t) {
+		protected void applyTransformation(float interpolatedTime,
+				Transformation t) {
 
 			int newHeight;
-			newHeight = (int) (targetHeight - extraHeight * (1 - interpolatedTime));
+			newHeight = (int) (targetHeight - extraHeight
+					* (1 - interpolatedTime));
 			view.getLayoutParams().height = newHeight;
 			view.requestLayout();
 		}
@@ -166,4 +178,3 @@ public class ParallaxScollListView extends ListView implements OnScrollListener 
 
 	}
 }
-

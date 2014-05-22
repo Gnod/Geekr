@@ -24,6 +24,8 @@ import com.gnod.geekr.tool.WeiboBaseTool;
 import com.gnod.geekr.tool.StringUtils;
 import com.gnod.geekr.tool.manager.AccountManager;
 import com.gnod.geekr.tool.manager.DrawableManager;
+import com.gnod.geekr.tool.manager.ImageCache;
+import com.gnod.geekr.tool.manager.ImageFetcher;
 import com.gnod.geekr.tool.manager.SettingManager;
 import com.gnod.geekr.tool.manager.StatusManager;
 import com.gnod.geekr.ui.activity.TimeLineActivity;
@@ -31,7 +33,9 @@ import com.gnod.geekr.ui.activity.TimeLineActivity;
 public class AppConfig extends Application {
 	
 	private final String APP_PREFERENCE = "com.gnod.preference";
-
+	public static ImageFetcher sImageFetcher;
+	private static final String IMAGE_CACHE_DIR = "thumbs";
+	
 	public static final int NETWORK_NONE = 0;
 	public static final int NETWORK_WIFI = 1;
 	public static final int NETWORK_CMNET = 2;
@@ -58,6 +62,14 @@ public class AppConfig extends Application {
 		mFetchImage = isImgFetch();
 		
 		ImageHelper.initEmotion(this);
+		
+		ImageCache.ImageCacheParams cacheParams = 
+				new ImageCache.ImageCacheParams(this, IMAGE_CACHE_DIR);
+		cacheParams.setMemCacheSizePercent(0.25f);
+		
+		ImageCache imageCache = ImageCache.getInstance(cacheParams);
+		sImageFetcher = new ImageFetcher(mContext, imageCache, Integer.MAX_VALUE, Integer.MAX_VALUE);
+		
 	}
 	
 	//判断当前网络是否为wifi

@@ -79,6 +79,7 @@ public class AppManager {
 	
 	public void appExit(Context context) {
 		try {
+			AppConfig.sImageFetcher.closeCache();
 			finishAllActivity();
 			System.exit(0);
 		} catch (Exception e) {

@@ -27,8 +27,9 @@ public class GeekrViewConverter {
 		if (userInfo != null) {
 			if(viewHolder.layoutAvatar.getVisibility() == View.VISIBLE) {
 				viewHolder.imageAvatar.setItem(userInfo);
-				AppConfig.getDrawableManager().loadBitmap(userInfo.iconURL,
-						viewHolder.imageAvatar, true);
+//				AppConfig.getDrawableManager().loadBitmap(userInfo.iconURL,
+//						viewHolder.imageAvatar, true);
+				AppConfig.sImageFetcher.loadImage(userInfo.iconURL, viewHolder.imageAvatar, R.drawable.avatar_default);
 				viewHolder.textName.setText(userInfo.nickName);
 	
 				ImageHelper.setVerifiedImage(viewHolder.verifiedImage,
@@ -51,14 +52,23 @@ public class GeekrViewConverter {
 			viewHolder.imageThumb.setVisibility(View.VISIBLE);
 			viewHolder.imageThumb.setURL(item.midImageURL);
 			if(type == IMAGE_MODEL.SMALL) {
-				viewHolder.imageThumb.setImageResource(R.drawable.wb_pic_loading);
-				AppConfig.getDrawableManager().loadBitmap(item.imageURL,
-						viewHolder.imageThumb, true);
+//				viewHolder.imageThumb.setImageResource(R.drawable.wb_pic_loading);
+//				AppConfig.getDrawableManager().loadBitmap(item.imageURL,
+//						viewHolder.imageThumb, true);
+				AppConfig.sImageFetcher.loadImage(
+						item.imageURL,
+						viewHolder.imageThumb, 
+						R.drawable.wb_pic_loading);
+				
 			} else if(type == IMAGE_MODEL.BIG) {
-				viewHolder.imageThumb.setImageResource(
+//				viewHolder.imageThumb.setImageResource(
+//						R.drawable.wb_pic_loading_large);
+//				AppConfig.getDrawableManager().loadBitmap(item.midImageURL,
+//						viewHolder.imageThumb, true);
+				AppConfig.sImageFetcher.loadImage(
+						item.midImageURL,
+						viewHolder.imageThumb, 
 						R.drawable.wb_pic_loading_large);
-				AppConfig.getDrawableManager().loadBitmap(item.midImageURL,
-						viewHolder.imageThumb, true);
 			}
 		}
 
@@ -93,17 +103,25 @@ public class GeekrViewConverter {
 						item.retweetItem.midImageURL);
 				
 				if(type == IMAGE_MODEL.SMALL) {
-					viewHolder.imageRetweetThumb.setImageResource(
-							R.drawable.wb_pic_loading);
-					AppConfig.getDrawableManager().loadBitmap(
+//					viewHolder.imageRetweetThumb.setImageResource(
+//							R.drawable.wb_pic_loading);
+//					AppConfig.getDrawableManager().loadBitmap(
+//							item.retweetItem.imageURL,
+//							viewHolder.imageRetweetThumb, true);
+					AppConfig.sImageFetcher.loadImage(
 							item.retweetItem.imageURL,
-							viewHolder.imageRetweetThumb, true);
-				} else if(type == IMAGE_MODEL.BIG) {
-					viewHolder.imageRetweetThumb.setImageResource(
+							viewHolder.imageRetweetThumb, 
 							R.drawable.wb_pic_loading_large);
-					AppConfig.getDrawableManager().loadBitmap(
+				} else if(type == IMAGE_MODEL.BIG) {
+//					viewHolder.imageRetweetThumb.setImageResource(
+//							R.drawable.wb_pic_loading_large);
+//					AppConfig.getDrawableManager().loadBitmap(
+//							item.retweetItem.midImageURL,
+//							viewHolder.imageRetweetThumb, true);
+					AppConfig.sImageFetcher.loadImage(
 							item.retweetItem.midImageURL,
-							viewHolder.imageRetweetThumb, true);
+							viewHolder.imageRetweetThumb, 
+							R.drawable.wb_pic_loading_large);
 				}
 			}
 		}

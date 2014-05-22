@@ -56,7 +56,7 @@ public class GeekrPanel extends RelativeLayout{
 	
 	public void setBtnDelVisible(boolean flag){
 		mPanelHolder.btnDel.setVisibility(flag? View.VISIBLE : View.GONE);
-		mPanelHolder.delDivide.setVisibility(flag? View.VISIBLE : View.GONE);
+//		mPanelHolder.delDivide.setVisibility(flag? View.VISIBLE : View.GONE);
 	}
 	
 	public void setClickedListener(OnItemClcikListener l) {

@@ -13,10 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AbsListView.OnScrollListener;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.gnod.geekr.R;
+import com.gnod.geekr.app.AppConfig;
 import com.gnod.geekr.app.adapter.StatusDetailAdapter;
 import com.gnod.geekr.holder.StatusViewHolder;
 import com.gnod.geekr.model.AccountModel;
@@ -31,6 +33,7 @@ import com.gnod.geekr.tool.fetcher.CommentFetcher;
 import com.gnod.geekr.tool.fetcher.NoticeFetcher;
 import com.gnod.geekr.tool.manager.AccountManager;
 import com.gnod.geekr.tool.manager.StatusManager;
+import com.gnod.geekr.tool.manager.Utils;
 import com.gnod.geekr.widget.AvatarView;
 import com.gnod.geekr.widget.ColorToast;
 import com.gnod.geekr.widget.ColorToast.ToastColor;
@@ -45,30 +48,45 @@ public class StatusDetailActivity extends BaseActivity {
 	private StatusModel itemModel;
 	private StatusDetailAdapter mAdapter;
 	private CommentFetcher mFetcher;
-	
+
 	private int position = -1;
 	private MenuItem refreshMenu;
 	private ListViewFooter footer;
 	private ColorToast toastTop;
 	private String mStatusTag;
 	private StatusViewHolder statusView;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 
 		mFetcher = new CommentFetcher();
-		
+
 		Intent intent = this.getIntent();
-		itemModel =(StatusModel)intent.getSerializableExtra("itemModel");
-		position  = intent.getIntExtra("Position", -1);
-		//Using for cache query
+		itemModel = (StatusModel) intent.getSerializableExtra("itemModel");
+		position = intent.getIntExtra("Position", -1);
+		// Using for cache query
 		mStatusTag = intent.getStringExtra("StatusTag");
-		if(itemModel == null || itemModel.userInfo == null)
+		if (itemModel == null || itemModel.userInfo == null)
 			finish();
 		initView();
 		bindListener();
 		bindView();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AppConfig.sImageFetcher.setExitTasksEarly(false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AppConfig.sImageFetcher.setPauseWork(false);
+		AppConfig.sImageFetcher.setExitTasksEarly(true);
+		AppConfig.sImageFetcher.flushCache();
 	}
 
 	@Override
@@ -102,57 +120,80 @@ public class StatusDetailActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		
-		mListView = (ListView)findViewById(R.id.view_detail_list);
-		View header = LayoutInflater.from(this).inflate(R.layout.listitem_detail_header, null);
+
+		mListView = (ListView) findViewById(R.id.view_detail_list);
+		View header = LayoutInflater.from(this).inflate(
+				R.layout.listitem_detail_header, null);
 		footer = new ListViewFooter(this);
-		
-		toastTop = (ColorToast)findViewById(R.id.view_detail_toast_top);
-		
+
+		toastTop = (ColorToast) findViewById(R.id.view_detail_toast_top);
+
 		statusView = new StatusViewHolder();
-		statusView.layoutAvatar = (RelativeLayout)header.findViewById(R.id.layout_timeline_avatar);
-		statusView.imageAvatar = (AvatarView)header.findViewById(R.id.image_avatar_small);
-		statusView.verifiedImage = (ImageView)header.findViewById(R.id.image_avatar_verified);
-		statusView.textName = (TextView) header.findViewById(R.id.text_detailhead_name);
-		
-		statusView.textContent = (TextView)header.findViewById(R.id.text_detailhead_content);
-		statusView.imageThumb = (URLImageView)header.findViewById(R.id.image_detailhead_thumb);
-		statusView.layoutRetweet = (LinearLayout)header.findViewById(R.id.layout_detailhead_retweet);
-		statusView.textRetweetContent = (TextView) header.findViewById(R.id.text_detailhead_retweet_content);
-		statusView.imageRetweetThumb = (URLImageView) header.findViewById(R.id.image_detailhead_retweet_thumb);
-		statusView.textTime = (TextView) header.findViewById(R.id.text_detailhead_time);
-		statusView.textSource = (TextView) header.findViewById(R.id.text_detailhead_source);
-		statusView.textRetweetCount = (TextView)header.findViewById(R.id.text_detailhead_ret_count);
-		statusView.textCommentCount = (TextView) header.findViewById(R.id.text_detailhead_cmt_count);
-		
+		statusView.layoutAvatar = (RelativeLayout) header
+				.findViewById(R.id.layout_timeline_avatar);
+		statusView.imageAvatar = (AvatarView) header
+				.findViewById(R.id.image_avatar_small);
+		statusView.verifiedImage = (ImageView) header
+				.findViewById(R.id.image_avatar_verified);
+		statusView.textName = (TextView) header
+				.findViewById(R.id.text_detailhead_name);
+
+		statusView.textContent = (TextView) header
+				.findViewById(R.id.text_detailhead_content);
+		statusView.imageThumb = (URLImageView) header
+				.findViewById(R.id.image_detailhead_thumb);
+		statusView.layoutRetweet = (LinearLayout) header
+				.findViewById(R.id.layout_detailhead_retweet);
+		statusView.textRetweetContent = (TextView) header
+				.findViewById(R.id.text_detailhead_retweet_content);
+		statusView.imageRetweetThumb = (URLImageView) header
+				.findViewById(R.id.image_detailhead_retweet_thumb);
+		statusView.textTime = (TextView) header
+				.findViewById(R.id.text_detailhead_time);
+		statusView.textSource = (TextView) header
+				.findViewById(R.id.text_detailhead_source);
+		statusView.textRetweetCount = (TextView) header
+				.findViewById(R.id.text_detailhead_ret_count);
+		statusView.textCommentCount = (TextView) header
+				.findViewById(R.id.text_detailhead_cmt_count);
+
 		mListView.addHeaderView(header);
 		mListView.addFooterView(footer);
 		mAdapter = new StatusDetailAdapter(this, itemModel, mList);
 		mListView.setAdapter(mAdapter);
 	}
-	
+
 	private void bindListener() {
 		mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			private boolean lastViewVisible = false;
+
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				if (scrollState == OnScrollListener.SCROLL_STATE_FLING) {
+					if (!Utils.hasHoneycomb()) {
+						AppConfig.sImageFetcher.setPauseWork(true);
+					}
+				} else {
+					AppConfig.sImageFetcher.setPauseWork(false);
+				}
 			}
+
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-				if(mList.size() == 0 || footer.isLoading())
+				if (mList.size() == 0 || footer.isLoading())
 					return;
-				if(firstVisibleItem + visibleItemCount >= totalItemCount && 
-						!lastViewVisible) {
+				if (firstVisibleItem + visibleItemCount >= totalItemCount
+						&& !lastViewVisible) {
 					lastViewVisible = true;
-					if(mList.size()  < Integer.parseInt(itemModel.commentCount)) {
+					if (mList.size() < Integer.parseInt(itemModel.commentCount)) {
 						setRefreshing(true);
 						footer.startLoading();
 						long maxId = Long.parseLong(mList.get(mList.size() - 1).ID);
-						mFetcher.fetchComment(itemModel.ID, 0, maxId, 
+						mFetcher.fetchComment(itemModel.ID, 0, maxId,
 								FETCH_COUNT, 1, onCommentFetchListener);
 					}
-				} else if(firstVisibleItem + visibleItemCount < totalItemCount) {
+				} else if (firstVisibleItem + visibleItemCount < totalItemCount) {
 					lastViewVisible = false;
 				}
 			}
@@ -162,51 +203,53 @@ public class StatusDetailActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// comment header 占据了位置 0
-				if(position == 0)
+				if (position == 0)
 					return;
 				int index = position - 1;
 				// 排除footer
-				if(index >= mList.size())
+				if (index >= mList.size())
 					return;
 				CommentModel model = mList.get(index);
-				LaunchHelper.startReplyActivity(
-						StatusDetailActivity.this, model);
+				LaunchHelper.startReplyActivity(StatusDetailActivity.this,
+						model);
 			}
 		});
 	}
-	
+
 	private void setRefreshing(boolean checked) {
-		if(refreshMenu != null){
-			if(checked)
+		if (refreshMenu != null) {
+			if (checked)
 				refreshMenu.setActionView(R.layout.layout_loading);
-			else 
+			else
 				refreshMenu.setActionView(null);
 		}
 	}
-	
+
 	private void bindView() {
 		setTitle("正文");
-		
-		GeekrViewConverter.attachViewDatas(statusView, itemModel, position, 
+
+		GeekrViewConverter.attachViewDatas(statusView, itemModel, position,
 				IMAGE_MODEL.BIG);
-		if(itemModel.retweetItem != null) {
-			statusView.layoutRetweet.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(StatusDetailActivity.this, StatusDetailActivity.class);
-					intent.putExtra("itemModel", itemModel.retweetItem);
-					startActivity(intent);
-				}
-			});
+		if (itemModel.retweetItem != null) {
+			statusView.layoutRetweet
+					.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(
+									StatusDetailActivity.this,
+									StatusDetailActivity.class);
+							intent.putExtra("itemModel", itemModel.retweetItem);
+							startActivity(intent);
+						}
+					});
 		}
 	}
 
 	private void fetchDatas(String id) {
 		mFetcher.fetchStatus(id, onStatusFetchListener);
-		mFetcher.fetchComment(id, 0, 0, FETCH_COUNT, 
-				1, onCommentFetchListener);
+		mFetcher.fetchComment(id, 0, 0, FETCH_COUNT, 1, onCommentFetchListener);
 	}
-	
+
 	private FetchCompleteListener onStatusFetchListener = new FetchCompleteListener() {
 		@Override
 		public void fetchComplete(int state, int code, Object obj) {
@@ -216,19 +259,19 @@ public class StatusDetailActivity extends BaseActivity {
 				toastTop.show((String) obj, ToastColor.RED);
 				break;
 			case NoticeFetcher.FETCH_SUCCEED_NEWS:
-				itemModel = (StatusModel)obj;
-				if(position != -1 && !StringUtils.isNullOrEmpty(mStatusTag)) {
+				itemModel = (StatusModel) obj;
+				if (position != -1 && !StringUtils.isNullOrEmpty(mStatusTag)) {
 					AccountModel account = AccountManager.getActivityAccount();
-					StatusManager.setSingleStatus(mStatusTag, 
-							account, position, itemModel);
+					StatusManager.setSingleStatus(mStatusTag, account,
+							position, itemModel);
 				}
-				GeekrViewConverter.attachViewDatas(statusView, itemModel, position, 
-						IMAGE_MODEL.BIG);
+				GeekrViewConverter.attachViewDatas(statusView, itemModel,
+						position, IMAGE_MODEL.BIG);
 				break;
 			}
 		}
 	};
-	
+
 	private FetchCompleteListener onCommentFetchListener = new FetchCompleteListener() {
 		@Override
 		public void fetchComplete(int state, int code, Object obj) {
@@ -243,13 +286,13 @@ public class StatusDetailActivity extends BaseActivity {
 				footer.stopLoading("-NO COMMENTS-");
 				break;
 			case NoticeFetcher.FETCH_SUCCEED_NEWS:
-				ArrayList<CommentModel> result = (ArrayList<CommentModel>)obj;
-				if(result.size() != 0){
+				ArrayList<CommentModel> result = (ArrayList<CommentModel>) obj;
+				if (result.size() != 0) {
 					mList.clear();
 					mList.addAll(result);
 					mAdapter.notifyDataSetChanged();
 					mListView.setSelection(0);
-					if(result.size() < 5) {
+					if (result.size() < 5) {
 						footer.stopLoading("-END-");
 					} else {
 						footer.stopLoading("-MORE-");
@@ -257,13 +300,13 @@ public class StatusDetailActivity extends BaseActivity {
 				}
 				break;
 			case NoticeFetcher.FETCH_SUCCEED_MORE:
-				ArrayList<CommentModel> resultList = (ArrayList<CommentModel>)obj;
-				if(resultList.size() != 0){
+				ArrayList<CommentModel> resultList = (ArrayList<CommentModel>) obj;
+				if (resultList.size() != 0) {
 					int lastIndex = mList.size() - 1;
 					mList.remove(lastIndex);
 					mList.addAll(resultList);
 					mAdapter.notifyDataSetChanged();
-					if(resultList.size() < 5) {
+					if (resultList.size() < 5) {
 						footer.stopLoading("-END-");
 					} else {
 						footer.stopLoading("-MORE-");
@@ -276,12 +319,13 @@ public class StatusDetailActivity extends BaseActivity {
 			}
 		}
 	};
+
 	public class StatusDetailHeadView {
 		public AvatarView imageAvatar;
 		public TextView textName;
 		public ImageView verifiedImage;
 	}
-	
+
 	public class StatusDetailContentView {
 		public TextView textContent;
 		public URLImageView imageThumb;

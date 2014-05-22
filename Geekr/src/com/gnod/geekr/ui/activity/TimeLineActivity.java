@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 
 import com.actionbarsherlock.internal.widget.IcsAdapterView;
@@ -97,6 +98,22 @@ public class TimeLineActivity extends SlidingFragmentActivity implements
 		bindListener();
 		bindView();
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AppConfig.sImageFetcher.setExitTasksEarly(false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AppConfig.sImageFetcher.setPauseWork(false);
+		AppConfig.sImageFetcher.setExitTasksEarly(true);
+		AppConfig.sImageFetcher.flushCache();
+	}
+
+
 
 	@Override
 	protected void onStop() {

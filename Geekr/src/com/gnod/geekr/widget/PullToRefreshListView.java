@@ -21,6 +21,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gnod.geekr.R;
+import com.gnod.geekr.app.AppConfig;
+import com.gnod.geekr.tool.manager.Utils;
 
 public class PullToRefreshListView extends ListView implements OnScrollListener {
 
@@ -161,6 +163,13 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
 
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+			if (!Utils.hasHoneycomb()) {
+				AppConfig.sImageFetcher.setPauseWork(true);
+			} 
+		} else {
+			AppConfig.sImageFetcher.setPauseWork(false);
+		}
 	}
 
 	public boolean dispatchTouchEvent(MotionEvent event) {

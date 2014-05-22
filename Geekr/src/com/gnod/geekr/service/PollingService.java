@@ -7,7 +7,6 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 
 import com.gnod.geekr.R;
@@ -122,12 +121,14 @@ public class PollingService extends Service {
 				iconId, 
 				text, 
 				System.currentTimeMillis(), 
-				Notification.FLAG_AUTO_CANCEL | 
-				Notification.DEFAULT_VIBRATE, 
+				Notification.FLAG_AUTO_CANCEL, 
 				intent, 
 				title, 
 				text);
-		mNotificationMgr.notify(typeId, builder.getNotification());
+		Notification notification = builder.getNotification();
+		notification.defaults |= Notification.DEFAULT_SOUND;
+		notification.defaults |= Notification.DEFAULT_VIBRATE;
+		mNotificationMgr.notify(typeId, notification);
 	}
 	
 	private class PollingFetchListener implements FetchCompleteListener {
@@ -155,7 +156,8 @@ public class PollingService extends Service {
 				String type = UNREAD_TYPE.FOLLOWER.toString();
 				if(model.followerCount == prevNewFansCount){
 					return;
-				} 
+				}
+				prevNewFansCount = model.followerCount;
 				String hintText = new StringBuilder().append("增加")
 						.append(model.followerCount).append("位新粉丝")
 						.toString();
@@ -180,7 +182,7 @@ public class PollingService extends Service {
 				if(model.cmtCount == prevCmtCount){
 					return;
 				} 
-				
+				prevCmtCount = model.cmtCount;
 				String hintText = new StringBuilder().append("收到")
 				.append(model.cmtCount).append("条新评论")
 				.toString();
@@ -200,7 +202,7 @@ public class PollingService extends Service {
 				if(model.atMeCount == prevAtMeCount){
 					return;
 				}
-				
+				prevMetAtMeCount = model.atMeCount;
 				String hintText = new StringBuilder().append("收到")
 				.append(model.atMeCount).append("条@我的消息")
 				.toString();
@@ -221,7 +223,7 @@ public class PollingService extends Service {
 				if(model.metAtMeCount == prevMetAtMeCount){
 					return;
 				} 
-				
+				prevMetAtMeCount = model.metAtMeCount;
 				String hintText = new StringBuilder().append("收到")
 				.append(model.metAtMeCount).append("条@我的评论")
 				.toString();

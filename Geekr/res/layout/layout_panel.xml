@@ -34,7 +34,9 @@
         android:id="@+id/sd_btn_fav_divider"
         style="@style/sd_item"
         android:layout_width="1.5dip"
-        android:src="@drawable/sd_divider" />
+        android:src="@drawable/sd_divider" 
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/sd_btn_view"
@@ -58,7 +60,9 @@
         android:id="@+id/sd_btn_ret_divider"
         style="@style/sd_item"
         android:layout_width="1.5dip"
-        android:src="@drawable/sd_divider" />
+        android:src="@drawable/sd_divider" 
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/sd_btn_ret"
@@ -68,7 +72,8 @@
     <ImageView
         style="@style/sd_item"
         android:layout_width="1.5dip"
-        android:src="@drawable/sd_divider" />
+        android:src="@drawable/sd_divider" 
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/sd_btn_cmt"

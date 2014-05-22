@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -29,6 +31,7 @@ import com.gnod.geekr.tool.fetcher.BaseFetcher.FetchCompleteListener;
 import com.gnod.geekr.tool.fetcher.NoticeFetcher;
 import com.gnod.geekr.tool.fetcher.SearchFetcher;
 import com.gnod.geekr.tool.manager.DrawableManager;
+import com.gnod.geekr.tool.manager.Utils;
 import com.gnod.geekr.widget.ListViewFooter;
 
 public class AtUserActivity extends BaseActivity {
@@ -56,6 +59,20 @@ public class AtUserActivity extends BaseActivity {
 		
 	}
 
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		AppConfig.sImageFetcher.setExitTasksEarly(false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AppConfig.sImageFetcher.setPauseWork(false);
+		AppConfig.sImageFetcher.setExitTasksEarly(true);
+		AppConfig.sImageFetcher.flushCache();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_search, menu);
@@ -71,11 +88,6 @@ public class AtUserActivity extends BaseActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 	}
 
 	private void initView() {
@@ -122,6 +134,25 @@ public class AtUserActivity extends BaseActivity {
 				intent.putExtra("Name", user.nickName);
 				AtUserActivity.this.setResult(RESULT_OK, intent);
 				finish();
+			}
+		});
+		mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				if(scrollState == OnScrollListener.SCROLL_STATE_FLING) {
+					if (!Utils.hasHoneycomb()) {
+						AppConfig.sImageFetcher.setPauseWork(true);
+					}
+				} else {
+					AppConfig.sImageFetcher.setPauseWork(false);
+				}
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}

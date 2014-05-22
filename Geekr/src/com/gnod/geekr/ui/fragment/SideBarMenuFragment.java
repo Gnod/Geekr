@@ -123,7 +123,10 @@ public class SideBarMenuFragment extends Fragment {
 	private void setAccount(AccountModel account) {
 		mAccountView.textName.setText(account.name);
 		mAccountView.textType.setText(account.getTypeName());
-		mDrawableMgr.loadAvatar(account.iconURL, mAccountView.avatar, true);
+//		mDrawableMgr.loadAvatar(account.iconURL, mAccountView.avatar, true);
+		AppConfig.sImageFetcher.loadImage(
+				account.iconURL, mAccountView.avatar, 
+				R.drawable.avatar_default);
 	}
 
 

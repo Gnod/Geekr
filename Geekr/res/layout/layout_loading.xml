@@ -9,6 +9,6 @@
     android:layout_width="24.0dp"
     android:layout_height="24.0dp"
     android:background="@android:color/transparent"
-    android:indeterminateDrawable="@drawable/custom_progressbar_dark" />    
+    android:indeterminateDrawable="@drawable/custom_progressbar" />    
 </RelativeLayout>
 

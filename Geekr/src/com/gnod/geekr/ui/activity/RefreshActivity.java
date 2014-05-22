@@ -8,13 +8,16 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.AbsListView.OnScrollListener;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.gnod.geekr.R;
+import com.gnod.geekr.app.AppConfig;
 import com.gnod.geekr.tool.fetcher.BaseFetcher;
 import com.gnod.geekr.tool.fetcher.BaseFetcher.FetchCompleteListener;
 import com.gnod.geekr.tool.fetcher.NoticeFetcher;
+import com.gnod.geekr.tool.manager.Utils;
 import com.gnod.geekr.widget.ColorToast;
 import com.gnod.geekr.widget.ColorToast.ToastColor;
 import com.gnod.geekr.widget.ListViewFooter;
@@ -22,9 +25,9 @@ import com.gnod.geekr.widget.ListViewFooter;
 public abstract class RefreshActivity<T> extends BaseActivity {
 
 	public static final int DEFAULT_COUNT = 20;
-	
+
 	private boolean isAllLoaded = false;
-	
+
 	private MenuItem mRefresh;
 	private ListViewFooter mFooter;
 	private ColorToast mToastTop;
@@ -44,16 +47,30 @@ public abstract class RefreshActivity<T> extends BaseActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		AppConfig.sImageFetcher.setExitTasksEarly(false);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		AppConfig.sImageFetcher.setPauseWork(false);
+		AppConfig.sImageFetcher.setExitTasksEarly(true);
+		AppConfig.sImageFetcher.flushCache();
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getSupportMenuInflater().inflate(R.menu.menu_refresh, menu);
 		mRefresh = menu.findItem(R.id.menu_refresh);
 		setRefreshing(true);
 		mPage = 1;
-		//初始化加载10条，提高加载速度
+		// 初始化加载10条，提高加载速度
 		fetchDatas(10, mPage);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -70,31 +87,30 @@ public abstract class RefreshActivity<T> extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	private void setRefreshing(boolean checked) {
-		if(mRefresh != null){
-			if(checked)
+		if (mRefresh != null) {
+			if (checked)
 				mRefresh.setActionView(R.layout.layout_loading);
-			else 
+			else
 				mRefresh.setActionView(null);
 		}
 	}
 
 	private void initView() {
-		mListView = (ListView)findViewById(R.id.view_refresh_list);
-		mToastTop = (ColorToast)findViewById(R.id.layout_listview_top);
+		mListView = (ListView) findViewById(R.id.view_refresh_list);
+		mToastTop = (ColorToast) findViewById(R.id.layout_listview_top);
 
 		mHeadView = getHeadView();
-		if(mHeadView != null) 
+		if (mHeadView != null)
 			mListView.addHeaderView(mHeadView);
-		
+
 		mFooter = getFootView();
-		if(mFooter != null)
+		if (mFooter != null)
 			mListView.addFooterView(mFooter);
 		initAdapter();
 		mListView.setAdapter(getAdapter());
 	}
-	
 
 	private View getHeadView() {
 		return null;
@@ -105,91 +121,106 @@ public abstract class RefreshActivity<T> extends BaseActivity {
 	}
 
 	public abstract void initFetcher();
+
 	public abstract void initAdapter();
+
 	public abstract ListAdapter getAdapter();
+
 	public abstract int getListSize();
+
 	public abstract void bindView();
-	
+
 	public abstract void fetchDatas(int count, int page);
+
 	public abstract void onFetchSucceed(int state, ArrayList<T> resultList);
-	
+
 	public void onLastItemVisible() {
-		if(isAllLoaded == false && !mFooter.isLoading()) {
+		if (isAllLoaded == false && !mFooter.isLoading()) {
 			setRefreshing(true);
 			mFooter.startLoading();
 
-			fetchDatas(DEFAULT_COUNT, ++ mPage);
+			fetchDatas(DEFAULT_COUNT, ++mPage);
 		}
 	}
-	
+
 	public FetchCompleteListener getFetchListener() {
 		return onFetchListener;
 	}
-	
+
 	private void bindListener() {
 		mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			private boolean lastViewVisible = false;
+
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				if (scrollState == OnScrollListener.SCROLL_STATE_FLING) {
+					if (!Utils.hasHoneycomb()) {
+						AppConfig.sImageFetcher.setPauseWork(true);
+					}
+				} else {
+					AppConfig.sImageFetcher.setPauseWork(false);
+				}
 			}
+
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-				if(getListSize() == 0)
+				if (getListSize() == 0)
 					return;
-				if(firstVisibleItem + visibleItemCount >= totalItemCount && 
-						!lastViewVisible) {
+				if (firstVisibleItem + visibleItemCount >= totalItemCount
+						&& !lastViewVisible) {
 					lastViewVisible = true;
 					onLastItemVisible();
-				} else if(firstVisibleItem + visibleItemCount < totalItemCount) {
+				} else if (firstVisibleItem + visibleItemCount < totalItemCount) {
 					lastViewVisible = false;
 				}
 			}
 		});
-		
+
 		setItemClckListener();
 		setItemLongClickListener();
-		
+
 	}
-	
+
 	protected void setItemClckListener() {
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if((getHeadView() != null && position == 0) ||
-						position >= getListSize()) {
+				if ((getHeadView() != null && position == 0)
+						|| position >= getListSize()) {
 					return;
 				}
-				if(getHeadView() != null)
-					-- position;
+				if (getHeadView() != null)
+					--position;
 				onItemClicked(view, position, id);
 			}
 		});
 	}
-	
+
 	protected void setItemLongClickListener() {
-		mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+		mListView
+				.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if((getHeadView() != null && position == 0) ||
-						position >= getListSize()) {
-					return false;
-				}
-				if(getHeadView() != null)
-					-- position;
-				onItemLongClicked(view, position, id);
-				return false;
-			}
-		});
+					@Override
+					public boolean onItemLongClick(AdapterView<?> parent,
+							View view, int position, long id) {
+						if ((getHeadView() != null && position == 0)
+								|| position >= getListSize()) {
+							return false;
+						}
+						if (getHeadView() != null)
+							--position;
+						onItemLongClicked(view, position, id);
+						return false;
+					}
+				});
 	}
-	
 
-	protected void onItemClicked(View view, int position, long id){
-		
+	protected void onItemClicked(View view, int position, long id) {
+
 	}
+
 	protected void onItemLongClicked(View view, int position, long id) {
 	}
 
@@ -212,11 +243,11 @@ public abstract class RefreshActivity<T> extends BaseActivity {
 				break;
 			case BaseFetcher.FETCH_SUCCEED_NEWS:
 			case BaseFetcher.FETCH_SUCCEED_MORE:
-				ArrayList<T> resultList = (ArrayList<T>)obj;
+				ArrayList<T> resultList = (ArrayList<T>) obj;
 				onFetchSucceed(state, resultList);
 				if (state == NoticeFetcher.FETCH_SUCCEED_NEWS)
 					mListView.setSelection(0);
-				if(resultList.size() < 5) {
+				if (resultList.size() < 5) {
 					isAllLoaded = true;
 					mFooter.stopLoading("-END-");
 				} else {

@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 import com.gnod.geekr.app.AppConfig;
 import com.gnod.geekr.tool.converter.GeekrViewConverter.IMAGE_MODEL;
@@ -74,7 +73,6 @@ public class SettingManager {
 			picModel = AppConfig.getInstance().isWifi()? 
 					IMAGE_MODEL.BIG: IMAGE_MODEL.SMALL;
 		}
-		Log.e("model", model + " " + picModel);
 	}
 	
 	public static IMAGE_MODEL getPicModel() {

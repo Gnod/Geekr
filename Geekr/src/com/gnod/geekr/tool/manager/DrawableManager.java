@@ -36,44 +36,44 @@ public class DrawableManager {
 	}
   
  
-	public void loadAvatar(String url, ImageView imageView, boolean cache) { 
-    	loadBitmap(url, imageView, null, 0, 0, cache, TYPE_AVATAR_IMAGE);
-    }
-	
-    public void loadBitmap(String url, ImageView imageView, boolean cache) { 
-    	loadBitmap(url, imageView, null, 0, 0, cache, TYPE_NORMAL_IMAGE);
-    }
-	
-    public void loadBitmap(String url, ImageView imageView, Bitmap defaultBmp, boolean cache) {  
-    	loadBitmap(url, imageView, defaultBmp, 0, 0, cache, TYPE_NORMAL_IMAGE);
-    }
+//	public void loadAvatar(String url, ImageView imageView, boolean cache) { 
+//    	loadBitmap(url, imageView, null, 0, 0, cache, TYPE_AVATAR_IMAGE);
+//    }
+//	
+//    public void loadBitmap(String url, ImageView imageView, boolean cache) { 
+//    	loadBitmap(url, imageView, null, 0, 0, cache, TYPE_NORMAL_IMAGE);
+//    }
+//	
+//    public void loadBitmap(String url, ImageView imageView, Bitmap defaultBmp, boolean cache) {  
+//    	loadBitmap(url, imageView, defaultBmp, 0, 0, cache, TYPE_NORMAL_IMAGE);
+//    }
     
-    public void loadBitmap(String url, ImageView imageView, Bitmap defaultBmp, int width, int height, boolean cache, int type) {  
-        if(StringUtils.isNullOrEmpty(url))
-        	return;
-    	Bitmap bitmap = getBitmapFromCache(url);  
-        imageView.setTag(url);
-        if (bitmap != null) {  
-            imageView.setImageBitmap(bitmap);
-            return;
-        } 
-        
-    	String filename = FileUtils.convertUrl(url);
-		Bitmap bmp = null;
-		if(type == TYPE_AVATAR_IMAGE) {
-			bmp = ImageHelper.getBitmap(imageView.getContext(), filename);
-		} else if(type == TYPE_NORMAL_IMAGE) {
-			bmp = ImageHelper.getCacheImage(imageView.getContext(), filename);
-		}
-		
-		if(bmp != null){
-    		imageView.setImageBitmap(bmp);
-    	}else{
-    		if(defaultBmp != null)
-    			imageView.setImageBitmap(defaultBmp);
-    		fetchImage(url, filename, imageView, width, height, cache, type);
-    	}
-    }  
+//    public void loadBitmap(String url, ImageView imageView, Bitmap defaultBmp, int width, int height, boolean cache, int type) {  
+//        if(StringUtils.isNullOrEmpty(url))
+//        	return;
+//    	Bitmap bitmap = getBitmapFromCache(url);  
+//        imageView.setTag(url);
+//        if (bitmap != null) {  
+//            imageView.setImageBitmap(bitmap);
+//            return;
+//        } 
+//        
+//    	String filename = FileUtils.convertUrl(url);
+//		Bitmap bmp = null;
+//		if(type == TYPE_AVATAR_IMAGE) {
+//			bmp = ImageHelper.getBitmap(imageView.getContext(), filename);
+//		} else if(type == TYPE_NORMAL_IMAGE) {
+//			bmp = ImageHelper.getCacheImage(imageView.getContext(), filename);
+//		}
+//		
+//		if(bmp != null){
+//    		imageView.setImageBitmap(bmp);
+//    	}else{
+//    		if(defaultBmp != null)
+//    			imageView.setImageBitmap(defaultBmp);
+//    		fetchImage(url, filename, imageView, width, height, cache, type);
+//    	}
+//    }  
   
     public Bitmap getBitmapFromCache(String url) {  
         if (bitmapCache.containsKey(url)) { 

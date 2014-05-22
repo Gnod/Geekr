@@ -9,6 +9,12 @@
         android:title="通知类型"
         >
         <CheckBoxPreference 
+		    android:key="specialperson"
+		    android:title="特别关注·Beta"
+		    android:summary="(当指定用户有消息更新时提醒)"
+		    android:defaultValue="false"
+		    />
+        <CheckBoxPreference 
             android:key="newfans"
             android:title="新粉丝"
             android:defaultValue="false"
@@ -28,12 +34,6 @@
             android:title=" @我的微博"
             android:defaultValue="false"
             />
-       <CheckBoxPreference 
-		    android:key="specialperson"
-		    android:title="特别关注·Beta"
-		    android:summary="(当指定用户有消息更新时提醒)"
-		    android:defaultValue="false"
-		    />
     </PreferenceCategory>
      <PreferenceCategory 
         android:title="其它设置"

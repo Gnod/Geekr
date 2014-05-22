@@ -61,6 +61,7 @@ public class ProfileTimelineAdapter extends BaseAdapter {
 		StatusViewHolder statusView = (StatusViewHolder) convertView.getTag();
 		statusView.togglePanel.resetLayout();
 		statusView.layoutAvatar.setVisibility(View.GONE);
+		statusView.textName.setVisibility(View.GONE);
 		
 		
 		if(isSelf){

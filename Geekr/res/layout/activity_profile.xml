@@ -3,7 +3,7 @@
     xmlns:geekr="http://schemas.android.com/apk/res/com.gnod.geekr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"    
-    android:background="@drawable/bg_black" >
+    android:background="@drawable/background" >
     
     <com.gnod.geekr.widget.ParallaxScollListView
         android:id="@+id/view_profile_list"

@@ -370,7 +370,6 @@ public class SettingActivity extends SherlockPreferenceActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
 		AppManager.getInstance().finishActivity(this);
 	}
 

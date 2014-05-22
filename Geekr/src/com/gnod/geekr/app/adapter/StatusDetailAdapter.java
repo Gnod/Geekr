@@ -67,11 +67,14 @@ public class StatusDetailAdapter extends BaseAdapter {
 				commentView = (StatusDetailCommentView)convertView.getTag();
 			}
 			CommentModel comment = mList.get(position);
-			commentView.imageAvatar.setImageResource(R.drawable.avatar_default);
+//			commentView.imageAvatar.setImageResource(R.drawable.avatar_default);
 			UserInfoModel userInfo = comment.userInfo;
 			commentView.imageAvatar.setItem(userInfo);
 			
-			mDrawableMgr.loadBitmap(userInfo.iconURL, commentView.imageAvatar, true);
+//			mDrawableMgr.loadBitmap(userInfo.iconURL, commentView.imageAvatar, true);
+			AppConfig.sImageFetcher.loadImage(
+					userInfo.iconURL, commentView.imageAvatar, 
+					R.drawable.avatar_default);
 			commentView.textName.setText(userInfo.nickName);
 			
 			commentView.textContent.setText(comment.content);
